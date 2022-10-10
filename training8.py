@@ -15,3 +15,8 @@ cv2.imshow("Green channel",bgr[1])
 cv2.imshow("Red channel",bgr[2])
 
 cv2.waitKey(0)
+
+#만약 numpy 객체 인덱싱 방식?
+'''cv2.imshow("Blue channel",image[:,:,0])
+cv2.imshow("Green channel",image[:,:,1])
+cv2.imshow("Red channel",image[:,:,2])'''
