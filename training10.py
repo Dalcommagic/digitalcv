@@ -1,6 +1,6 @@
 import numpy as np, cv2
 
-x = np.array([1,2,3,5,10],np.float32)
+'''x = np.array([1,2,3,5,10],np.float32)
 y = np.array([2,5,7,2,9]).astype("float32")
 
 mag=cv2.magnitude(x,y)
@@ -16,4 +16,29 @@ print("[m_mag]=%s" % mag.T)
 print("[p_mag]=%s" % np.ravel(p_mag))
 print("[p_ang]=%s" % np.ravel(p_ang))
 print("[x_mat2]=%s" % x2.flatten())
-print("[y_mat2]=%s" % y2.flatton())
+print("[y_mat2]=%s" % y2.flatton())'''
+
+def mat_access1(mat):
+    for i in range(mat.shape[0]):
+        for j in range(mat.shape[1]):
+            k = mat[i,j]
+            mat[i,j]=k*2
+
+def mat_access2(mat):
+    for i in range(mat.shape[0]):
+        for j in range(mat.shape[1]):
+            k=mat.item(i,j)
+            mat.itemset((i,j),k*2)
+
+mat1=np.arange(10).reshape(2,5)
+mat2=np.arange(10).reshape(2,5)
+
+print("언소 처리 전: \n%s\n" % mat1)
+mat_access1(mat1)
+print("원소 처리 후 : \n%s\n" % mat1)
+
+print("원소 처리 전 : \n%s\n" % mat2)
+mat_access2(mat2)
+print("원소 처리 후 : \n%s\n" % mat2)
+
+
