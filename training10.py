@@ -41,7 +41,7 @@ print("원소 처리 전 : \n%s\n" % mat2)
 mat_access2(mat2)
 print("원소 처리 후 : \n%s\n" % mat2)'''
 
-import numpy as np
+'''import numpy as np
 import cv2
 
 image=np.zeros((200,400),np.uint8)
@@ -56,7 +56,40 @@ cv2.moveWindow(title2,400,50)
 cv2.imshow(title1, image)
 cv2.imshow(title2,image)
 cv2.waitKey(0)
-cv2.destroyAllWindows()
+cv2.destroyAllWindows()'''
+
+'''import numpy as np
+import cv2
+
+def onChange(value):
+    global image, tilte
+
+    add_value=value-int(image[0][0])
+    print("추가 화소값:",add_value)
+    image=image+add_value
+    cv2.imshow(title, image)
+
+image=np.zeros((300,500),np.uint8)
+cv2.imshow(title,image)
+
+cv2.createTrackbar('Brightness',title,image[0][0], 255, onChange)
+cv2.waitKey(0)
+cv2.destroyAllWindows()'''
+
+import numpy as np
+import cv2
+
+blue, green, red = (255,0,0),(0,255,0),(0,0,255)
+image = np.zeros((400,600,3),np.uint8)
+image[:]=(255,255,255)
+
+pt1, pt2 = (50,50),(250,150)
+pt3,pt4=(400,150),(500,50)
+roi = (50,200,200,100)
+
+
+cv2.line(image,pt1,pt2,red)
+cv2.line(image,pt3,pt4, green,3, cv2.LINE_AA)
 
 
 
