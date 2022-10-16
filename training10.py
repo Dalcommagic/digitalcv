@@ -79,7 +79,7 @@ cv2.destroyAllWindows()'''
 import numpy as np
 import cv2
 
-blue, green, red = (255,0,0),(0,255,0),(0,0,255)
+'''blue, green, red = (255,0,0),(0,255,0),(0,0,255)
 image = np.zeros((400,600,3),np.uint8)
 image[:]=(255,255,255)
 
@@ -89,7 +89,21 @@ roi = (50,200,200,100)
 
 
 cv2.line(image,pt1,pt2,red)
-cv2.line(image,pt3,pt4, green,3, cv2.LINE_AA)
+cv2.line(image,pt3,pt4, green,3, cv2.LINE_AA)'''
+ image = np.zeros((200,400),np.uint8)
+ image[:]=200
+
+ title1, title2 = 'Position1','Position2'
+ cv2.nameWindow(title1,cv2.WINDOW_AUTOSIZE)
+ cv2.nameWindow(title2)
+ cv2.moveWindow(title1,150,150)
+ cv2.moveWindow(title2, 400,50)
+
+ cv2.imshow(title1,image)
+ cv2.imshow(title2, image)
+ cv2.waitKey(0) #키 이벤트 대기
+ cv2.destroyAllWindows() #열린 모든 윈도우 파괴
+
 
 
 
