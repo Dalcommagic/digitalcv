@@ -76,8 +76,7 @@ cv2.createTrackbar('Brightness',title,image[0][0], 255, onChange)
 cv2.waitKey(0)
 cv2.destroyAllWindows()'''
 
-import numpy as np
-import cv2
+
 
 '''blue, green, red = (255,0,0),(0,255,0),(0,0,255)
 image = np.zeros((400,600,3),np.uint8)
@@ -90,7 +89,7 @@ roi = (50,200,200,100)
 
 cv2.line(image,pt1,pt2,red)
 cv2.line(image,pt3,pt4, green,3, cv2.LINE_AA)'''
- image = np.zeros((200,400),np.uint8)
+''' image = np.zeros((200,400),np.uint8)
  image[:]=200
 
  title1, title2 = 'Position1','Position2'
@@ -102,7 +101,72 @@ cv2.line(image,pt3,pt4, green,3, cv2.LINE_AA)'''
  cv2.imshow(title1,image)
  cv2.imshow(title2, image)
  cv2.waitKey(0) #키 이벤트 대기
- cv2.destroyAllWindows() #열린 모든 윈도우 파괴
+ cv2.destroyAllWindows() #열린 모든 윈도우 '''
+
+'''import numpy as np
+import cv2
+
+image = np.zeros((200,300),np.uint8)
+image.fill(255)
+
+title1, title2 ='AUTOSIZE','NORMAL'
+cv2.nameWindow(title1, image)
+cv2.nameWindow(title2, cv2.WINDOW_NORMAL)
+
+cv2.imshow(title1, image)
+cv1.imshow(title2, image)
+cv2.resizeWindow(title, 400, 300)
+cv2.resizeWindow(title2, 400, 300)
+cv2.waitKey(0)
+cv2.destroyAllWindows()'''
+
+'''import numpy as np
+import cv2
+
+def on Change(value):       #트랙바 콜백 함수
+    global image, title     #전역 변수 참조
+
+    add_value = value - int(image[0][0])    #트랙바 값과 영상 화소값 처분
+    print("추가 화소값:",add_value)
+    image = image + add_value       #행렬과 스칼라 덧셈 수행
+    cv2.imshow(title, image)
+
+image = np.zeros((300,500),np.uint8)    #영상 생성
+
+title = 'Trackbar Event'
+cv2.imshow(title, image)
+
+cv2.createTrackbar('Brightness', title,image[0][0],255,onChange)    #트랙바 콜백 함수 등록
+cv2.waitKey(0)
+cv2.destroyAllWindows()     #열린 모든 윈도우 제거'''
+
+import numpy as np
+import cv2
+
+blue, green, red = (255,0,0),(0,255,0),(0,0,255)
+image = np.zeros((400,600,3),np.uint8)
+image[:]=(255,255,255)
+
+pt1, pt2 = (50,50),(250,150)
+pt3, pt4 = (400,150),(500,50)
+roi=(50,200,200,100)
+
+cv2.line(image, pt1, pt2, red)
+cv2.line(image, pt3, pt4, green, 3, cv2.LINE_AA)
+
+cv2.rectangle(image, pt1, pt2, blue, 3, cv2.LINE_4)
+cv2.rectangle(image, roi, red, 3, cv2.LINE_8)
+cv2.rectangle(image,(400,200,100,100),green,cv2.FILLED)
+
+cv2.imshow("Line & Rectangle", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+
+
+
+
 
 
 
