@@ -209,7 +209,7 @@ if capture.isOpensed() == False:       #카메라 연결 예외처리
 
 print("너비 %d" % capture.get(cv2.CAP_PROP_FRAME_WIDTH))'''
 
-import numpy as np, cv2, math
+'''import numpy as np, cv2, math
 
 def calc_hsi(bgr):  #한 화소 hsi  계산함수
     B, G, R = float(bgr[0]), float(bgr[1]), float(bgr[2]) #float형 변환
@@ -239,7 +239,27 @@ Hue2, Saturation2, Internsity2 = cv2.split(HSV_img) #채널분리
 titles = ['BGR_img', 'Hue', 'Saturation', 'Intensity']
 [cv2.imshow(t, eval(t)) for t in titles]    #User 구현 결과 영상표시
 [cv2.imshow('OpenCV_'+t, eval(t+'2'))for t in titles[1:]]   #OpenCV 결과 영상 표시
-cv2.waitKey(0)
+cv2.waitKey(0)'''
+
+import cv2
+
+BGR_img = cv2.imread("images/color_space.jpg",cv2.IMREAD_COLOR) #컬러 영상을 읽어요
+if BGR_img is None: raise Exception("영상 파일 읽기 오류") #예외처리
+
+Gray_img = cv2.cvtColor(BGR_img, cv2.COLOR_BGR2GRAY)    #명암도 영상 변환
+YCC_img = cv2.ccvtColor(BGR_img, cv2.COLOR_BGR1YCrCb)   #YCbCr컬러 공간 변환
+YUV_img = cv2.cvtColor(BGR_img, cv2.COLOR_BGR2YUV)      #YUV컬러 공간 변환
+LAB_img =  cv2.cvtColor(BGR_img, cv2.COLOR_BGR2LAB)     #La*b* 컬러 공간 변환
+
+YCC_ch =  cv2.split(YCC_img)    #채널분리
+YUV_ch = cv2.split(YUV_img)
+Lab_ch = cv2.split(LAB_img)
+
+cv2.imshow("BGR_img", BGR_img)
+cv2.imshow("Gray_img", Gray_img)
+
+sp1, sp2, sp3 = ['Y','Cr']
+
 
 
 
