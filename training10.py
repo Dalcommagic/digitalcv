@@ -16,7 +16,7 @@ cv2.imshow(title1, image)
 cv2.imshow(title2, image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()'''
-import numpy as np, cv2
+'''import numpy as np, cv2
 
 #마우스 이벤트 제어 프로그램 작성
 def onMouse(event, x, y, flags, param):
@@ -34,7 +34,34 @@ title = 'test'
 cv2.imshow(title,img)
 cv2.setMouseCallback(title, onMouse)
 cv2.waitKey(0)
-cv2.destroyAllWindows()
+cv2.destroyAllWindows()'''
+
+import cv2
+
+capture = cv2.VideoCapture(0)
+if capture.isOpened() is None: raise Excepton("카메라 연결 안됨")
+
+capture.set(cv2.CAP_PROP_FRAME_WIDTH,400)   #카메라 프레임 너비
+capture.set(cv2.CAP_PROP_FRAME_HEIGHT,300)  #카메라 프레임 높이
+capture.set(cv2.CAP_PROP_AUTOFOCUS,0)   #오토포커스 정지
+capture.set(cv2.CAP_PROP_BRIGHTNESS,0)  #프레임 밝기를 초기화 시킨다.
+
+title ="test"
+cv2.nameWindow(title)
+
+while True:
+     ret, frame = capture.read()    #카메라 영상 출력
+     if not ret: break
+     if cv2.waitKey(100) == 27: break   #esc누르면 종료
+     blue, green, red = cv2.split(frame)    #컬러 영상 채널 분리
+     cv2.add(green[100:300,200:300], 50, green[100:300, 200:300])
+
+     frame = cv2.merge([blue, green, red])
+     cv2.rectangle(frame,(200,100), (300,300), (0,0,225),2) #관심 영역을 빨간색으로
+
+     cv2.imshow(title, frame)
+
+capture.release()
 
 
 
