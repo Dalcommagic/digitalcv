@@ -140,7 +140,7 @@ cv2.createTrackbar('Brightness', title,image[0][0],255,onChange)    #트랙바 �
 cv2.waitKey(0)
 cv2.destroyAllWindows()     #열린 모든 윈도우 제거'''
 
-import numpy as np
+'''import numpy as np
 import cv2
 
 blue, green, red = (255,0,0),(0,255,0),(0,0,255)
@@ -160,7 +160,24 @@ cv2.rectangle(image,(400,200,100,100),green,cv2.FILLED)
 
 cv2.imshow("Line & Rectangle", image)
 cv2.waitKey(0)
-cv2.destroyAllWindows()
+cv2.destroyAllWindows()'''
+
+import cv2
+
+def put_string(frame, tetxt, pt, value, color=(120,200,90)):    #문자열 출력
+    text += str(value)
+    shade == (pt[0]+2, pt[1] + 2)
+    font =cv2.FONT_HERSHEY_SIMPLEX
+    cv2.putText(frame, text, shade, font, 0.7,(0,0,0),2) #그림자 효과
+    cv2.putText(frame, text, pt  , font, 0,7, color,2)  #글자적기
+
+capture = cv2.VideoCapture(0)       #0번 카메라 연결
+if capture.isOpensed() == False:       #카메라 연결 예외처리
+    raise Exception("카메라 연결 안됨")
+
+print("너비 %d" % capture.get(cv2.CAP_PROP_FRAME_WIDTH))
+
+
 
 
 
