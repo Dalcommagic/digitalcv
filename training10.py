@@ -164,7 +164,39 @@ cv2.destroyAllWindows()'''
 
 import cv2
 
-def put_string(frame, tetxt, pt, value, color=(120,200,90)):    #문자열 출력
+capture = cv2.VideoCapture(0)   #0번 카메라 연결
+if capture.isOpened() == False: raise Exception("카메라 연결 안됨")
+
+fps =29.97      #초당 프레임 수
+delay = round(1000/fps) #프레임 간 지연시간
+size = (600, 360)   #동영상파일 해상도
+fourcc =  cv2.VideoWriter_fourcc(*'DX50')   #압축코덱 설정
+
+#카메라 속성 실행창에  출력
+print("width x height:", size)
+print("VideoWriterfourcc: %s" % fourcc)
+print("delay: %2d ms", % delay)
+print("fps: %.2f" % fps)
+
+capture.set(cv2.CAP_PROP_ZOOM,1)    #카메라 속성 지정
+capture.set(cv2.CAP_PROP_FRAME_WIDTH, sizez[0]) #해상도 설정
+capture.set(cv2.CAP_PROP_FRAME_HEIGHT, size[1])
+
+#동영상파일 개방 및 코덱, 해상도 설정
+writer = cv2.VideeoWriter("images/video_file.avi", fourcc, fps, size)
+if writer.isOpended() == False: rraise Exception("동영상 파일 개방 안됨")
+
+while True:
+    ret, frame = capture.read() #카메라 영상 받기
+    if not ret: break
+    if cv2.waitKey(delay) >= 0: break
+
+    writer.write(frame) #프레임을 동영상으로 저장
+    cv2.imshow("View Frame from camera", frame)
+
+writer.release()
+capture.release()
+'''def put_string(frame, tetxt, pt, value, color=(120,200,90)):    #문자열 출력
     text += str(value)
     shade == (pt[0]+2, pt[1] + 2)
     font =cv2.FONT_HERSHEY_SIMPLEX
@@ -175,7 +207,11 @@ capture = cv2.VideoCapture(0)       #0번 카메라 연결
 if capture.isOpensed() == False:       #카메라 연결 예외처리
     raise Exception("카메라 연결 안됨")
 
-print("너비 %d" % capture.get(cv2.CAP_PROP_FRAME_WIDTH))
+print("너비 %d" % capture.get(cv2.CAP_PROP_FRAME_WIDTH))'''
+
+
+
+
 
 
 
