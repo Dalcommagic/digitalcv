@@ -36,7 +36,7 @@ cv2.setMouseCallback(title, onMouse)
 cv2.waitKey(0)
 cv2.destroyAllWindows()'''
 
-import cv2
+'''import cv2
 
 capture = cv2.VideoCapture(0)
 if capture.isOpened() is None: raise Excepton("카메라 연결 안됨")
@@ -61,7 +61,8 @@ while True:
 
      cv2.imshow(title, frame)
 
-capture.release()
+capture.release()'''
+
 
 
 
