@@ -130,7 +130,7 @@ while True:
 
 capture.release()'''
 
-import cv2
+'''import cv2
 
 capture = cv2.VideoCapture(0)       #카메라 연결
 if capture.isOpenedd() is None: raise Exception("카메라 연결 안됨")
@@ -157,7 +157,127 @@ while True:
 
     cv2.imshow(title, frame)
 
-capture.release()
+capture.release()'''
+
+'''import cv2
+
+capture = cv2.VideoCapture(0)   #0번 카메라 연결
+if catpure.isOpened() is None: raise Exception("카메라 연결 안됨")
+
+title = "test"
+cv2.namedWindow(title)
+
+size = (640,480)    #동영상 크기
+fps = 15.0      #15프레임
+fourcc=cv2.VideoWriter_fourcc(*'DIVX')
+writer = cv2.VideoWriter("images/flip_test.avi", fourcc, fps, size)
+if writer.isOpened() == False: raise Exception("동영상 파일 개방 안됨")
+
+capture.set(cv2.CAP_PROP_FRAME_WIDTH,size[0])   #프레임 너비
+capture.set(cv2.CAP_PROP_FRAME_HEIGHT, size[1]) #프레임 높이
+capture.set(cv2.CAP_PROP_AUTOFOCUS,0)       #오토포커싱 중지
+capture.set(cv2.CAP_PROP_BRIGHTNESS,100)       #밝기 초기회
+
+while True:
+    ret, frame = capture.read() #카메라 영상을 받기
+    if not ret: break
+    if cv2.waitKey(100) == 27: break    #esc누르면 종료
+
+    frame = cv2.flip(frame,1)
+    writer.write(frame)
+    cv2.imshow(title, frame)
+
+writer.release()
+capture.release()'''
+
+'''import numpy as np, cv2
+
+image = cv2.imread("images/color.jpg", cv2.IMREAD_COLOR)        #이미지 영상을 읽어옵니다
+if image is None: raise Exception("영상 파일 읽기 오류")
+
+mask = np.zeros(image.shape[:2], np.uint8)  #이미지크기와 같은 영상(마스크기능)
+center = (190, 170)#타원의 중심
+cv2.ellipse(mask,center,(50,90),0,0,360,(255,255,255), -1)
+dst =cv2.add(image, image, mask=mask)
+
+cv2.imshow('image', image)
+cv2.imshow('dst', dst)
+cv2.waitKey(0)'''
+
+'''import numpy as np, cv2
+
+image = cv2.imread("images/sum_test.jpg", cv2.IMREAD_GRAYSCALE)
+if image is None: raise Exception("영상 파일 읽기 오류 발생")
+
+mask = np.zeros(image.shape[:2],np.uint8)
+mask[100:200, 100,200]=255  #관심영역 200, 100좌표 설정, 200*100크기 설정
+
+sum_value = cv2.sumElems(image) #채널별 합 구하기
+mean_value1 = cv2.mean(image)   #결과 튜플로 반환
+mean_value2 = cv2.mean(image,mask)
+
+print('sum_value 자료형:', type(sum_value), type(sum_value[0]))
+print("[sum_value]=", sum_value)
+print("[mean_value1]=", mean_value1)
+print("[mean_value2]=", mean_value2)
+print()
+
+mean, stddev=cv2.meanStdDev(image)
+mean2, stddev2 =  cv2.meanStdDev(image, mask=mask)
+print('mean자료형 :', type(mean), type(mean[0],[0]))
+print("[mean] = ", mean.flatten())
+print("[stddev]=",stddev.flatten())
+print()
+
+print("[mean2] =", mean2.flatten())
+print("[stddev2] = ", stddev2.flatten())
+
+cv2.imshow("image", image)
+cv2.imshow("mask", mask)
+cv2.waitKey(0)'''
+
+import numpy as np, cv2
+
+def bar(value):
+    global alpha, beta, title, image1, image2, dst
+
+    alpha = cv2.getTrackbarPos('image1', title) / 100
+    beta = cv2.getTrackbarPos('image2', title) / 100
+
+    image3 = cv2.addWeighted(image1, alpha, image2,beta,0)
+    dst[0:h, w:w*2] = image3[0:h, 0:w]
+
+    cv2.imshow(title, dst)
+
+image1 = cv2.imread("images/add1.jpg", cv2.IMREAD_GRAYSCALE)
+image2 = cv2.imread("images/add2.jpg", cv2.IMREAD_GRAYSCALE)
+if image1 is None or image2 is None: raise Exception("영상 파일 읽기 오류 발생")
+title = 'dst'
+
+alpha, beta = 0.6, 0.4
+image3 = cv2.addWeighted(image1, alpha, image2, beta,0)
+
+w,h = image1.shape
+dst = np.zeros((w,h*3),np.uint8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
